@@ -203,6 +203,7 @@ async def luz_dir():
 
 """Función para que encender o apagar los LEDs en el registro de corrimiento"""
 async def leds():
+    global est_leds
     while True:
         bina=list(decre_val) #Lista de elementos para binarios
 
@@ -212,7 +213,7 @@ async def leds():
             decre_pin1.value(int(bina[-2]))
             decre_pin2.value(int(bina[-3]))
             await asyncio.sleep(0.02)
-            est_leds=[lec0,lec0,lec1,lec1,lec1,lec1,lec2,lec2] #Faros=bit más significativo, intermitentes=bit intermedio, frenos=bit menos significativos
+            est_leds=[lec0.value(),lec0.value(),lec1.value(),lec1.value(),lec1.value(),lec1.value(),lec2.value(),lec2.value()] #Faros=bit más significativo, intermitentes=bit intermedio, frenos=bit menos significativos
 
         #Mandar el estado de los LEDs al registro
         for pos in range(len(est_leds)):
@@ -315,7 +316,7 @@ async def especial():
     
 """Función para comunicación remota con PC"""
 async def cliente(reader,writer):
-    global mov,fren,direc,vel_mots,luz_man,luz_dir_izq,luz_dir_der,luz_eme,decre,decre_val
+    global mov,fren,direc,vel_mots,luz_man,luz_dir_izq,luz_dir_der,luz_eme,decre,decre_val,est_leds
     try:
         while True:
             datos=await reader.readline()
@@ -367,6 +368,7 @@ async def cliente(reader,writer):
             elif comando.startswith("apdecre:"):
                 decre=0
                 decre_val="000"
+                est_leds=[0,0,0,0,0,0,0,0]
             elif comando.startswith("circulo:"):
                 await circulo()
             elif comando.startswith("zigzag:"):
