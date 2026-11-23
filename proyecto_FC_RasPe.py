@@ -212,8 +212,11 @@ async def leds():
             decre_pin0.value(int(bina[-1]))
             decre_pin1.value(int(bina[-2]))
             decre_pin2.value(int(bina[-3]))
-            await asyncio.sleep(0.02)
-            est_leds=[lec0.value(),lec0.value(),lec1.value(),lec1.value(),lec1.value(),lec1.value(),lec2.value(),lec2.value()] #Faros=bit más significativo, intermitentes=bit intermedio, frenos=bit menos significativos
+            await asyncio.sleep(0.01)
+            bit0=lec0.value()
+            bit1=lec1.value()
+            bit2=lec2.value()
+            est_leds=[bit2,bit2,bit1,bit1,bit1,bit1,bit0,bit0] #Faros=bit más significativo, intermitentes=bit intermedio, frenos=bit menos significativos
 
         #Mandar el estado de los LEDs al registro
         for pos in range(len(est_leds)):
@@ -355,7 +358,7 @@ async def cliente(reader,writer):
                     luz_dir_der=bool(int(comando.split(":")[1]))
             elif comando.startswith("luz_eme:"):
                 if not luz_eme:
-                    luz_dir_izq,luzdir_der=False,False
+                    luz_dir_izq,luz_dir_der=False,False
                     luz_eme=bool(int(comando.split(":")[1]))
                     dir_eve.set()
                 else:
@@ -367,6 +370,9 @@ async def cliente(reader,writer):
                 decre_val=comando.split(":")[1]
             elif comando.startswith("apdecre:"):
                 decre=0
+                decre_pin0.value(0)
+                decre_pin1.value(0)
+                decre_pin2.value(0)
                 decre_val="000"
                 est_leds=[0,0,0,0,0,0,0,0]
             elif comando.startswith("circulo:"):

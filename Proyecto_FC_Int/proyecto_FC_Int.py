@@ -149,7 +149,7 @@ crear_bot("Faros\nDelanteros",lambda:(luz_man.set(not luz_man.get()),coman_bool(
 crear_bot("Direccional\nDerecha",lambda:(luz_dir_der.set(not luz_dir_der.get()),coman_bool("luz_dir_der",luz_dir_der),luz_dir_izq.set(False),luz_eme.set(False)),0,3)
 crear_bot("Direccional\nIzquierda",lambda:(luz_dir_izq.set(not luz_dir_izq.get()),coman_bool("luz_dir_izq",luz_dir_izq),luz_dir_der.set(False),luz_eme.set(False)),2,3)
 crear_bot("Luces de\nEmergencia",lambda:(luz_eme.set(not luz_eme.get()),coman_bool("luz_eme",luz_eme),luz_dir_izq.set(False),luz_dir_der.set(False)),2,1)
-crear_bot("Decrementador\nautomático",lambda:coman_bool("autodecre",autodecre),4,5)
+crear_bot("Decrementador\nautomático",lambda:coman_gen("autodecre",autodecre),4,5)
 crear_bot("Apagar\ndecrementador",lambda:coman_gen("apdecre",apdecre),4,4)
 crear_bot("Circulos",lambda:coman_gen("circulo",circulo),7,1)
 crear_bot("Zig-zag",lambda:coman_gen("zigzag",zigzag),7,3)
