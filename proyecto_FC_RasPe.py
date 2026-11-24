@@ -230,77 +230,77 @@ async def leds():
 """Función para hacer que el carro avance en círculos"""
 async def circulo():
     global mov, direc, vel_mots
-    
+    vel_ant=vel_mots
     vel_mots = 3
     mov = True
+    
     direc = 1
     await cam_direc()
-
     await asyncio.sleep(10)
 
     mov = False
     direc = 0
-    vel_mots = 0
+    vel_mots = vel_ant
     await cam_direc()
 
 """Función para hacer que el carro avance en zig-zag"""
 async def zigzag():
     global mov, direc, vel_mots
+    vel_ant=vel_mots
     vel_mots = 3
     mov = True
 
     for i in range(3):
         direc = -1
         await cam_direc()
-
-        await asyncio.sleep(1)
+        await asyncio.sleep(2)
 
         direc = 1
         await cam_direc()
-        await asyncio.sleep(1)
+        await asyncio.sleep(2)
     
     direc = 0
     mov = False
-    vel_mots = 0
+    vel_mots =  vel_ant
     await cam_direc()
 
 """Función para hacer que el carro avance en infinito"""
 async def infinito():
     global mov, direc, vel_mots
-    print("Iniciando figura de infinito...")
-    
+    vel_ant=vel_mots
     vel_mots = 3
     mov = True
     
     direc = -1
     await cam_direc()
-    await asyncio.sleep(2)
+    await asyncio.sleep(2.5)
 
     direc = 0
     await cam_direc()
-    await asyncio.sleep(2.5) 
+    await asyncio.sleep(1.5) 
     
     direc = 1
     await cam_direc()
-    await asyncio.sleep(2)
+    await asyncio.sleep(2.5)
 
     direc = 0
     await cam_direc()
-    await asyncio.sleep(2.5)
+    await asyncio.sleep(1.5)
     
     direc = -1
     await cam_direc()
-    await asyncio.sleep(2)
+    await asyncio.sleep(2.5)
 
     direc = 0
     mov = False
-    vel_mots = 0
+    vel_mots =  vel_ant
     await cam_direc()
 
 """Función de movimiento especial"""
 async def especial():
     #Realiza un cuadrado
     global mov, direc, vel_mots
+    vel_ant=vel_mots
     vel_mots = 3
     mov = True
 
@@ -310,11 +310,11 @@ async def especial():
         await asyncio.sleep(2)
         direc = 1  
         await cam_direc()
-        await asyncio.sleep(1)
+        await asyncio.sleep(1.5)
         
     direc = 0
     mov = False
-    vel_mots = 0
+    vel_mots = vel_ant
     await cam_direc()
     
 """Función para comunicación remota con PC"""

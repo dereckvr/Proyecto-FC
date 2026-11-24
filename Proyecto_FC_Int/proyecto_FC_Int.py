@@ -164,7 +164,7 @@ crear_bot("Enviar número\npara decrementador",lambda:coman_gen("mandecre",mande
 """Barra de velocidad"""
 barra=tkinter.Scale(orient="vertical",from_=4, to=-4,variable=vel_mots)
 barra.grid(column=5,row=4,rowspan=3,sticky="ns")
-barra.bind("<ButtonRelease-1>",lambda x:coman_gen("vel_mots",vel_mots))
+barra.bind("<ButtonRelease-1>",lambda x:(coman_gen("vel_mots",vel_mots),print(vel_mots.get())))
 
 """Conexión con Rasperry Pi"""
 crear_bot("Reintentar conexión",conexion,5,1)
